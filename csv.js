@@ -9,7 +9,16 @@ function lamecsv(str) {
   }, []);
 }
 
-function nth(row, num) { return row[num]; }
+function isIndexed(data) {
+  return _.isArray(data) || _.isString(data);
+}
+
+function nth(data, index) {
+  if (!_.isNumber(index)) fail("Expected a number as the index");
+  if (!isIndexed(data)) fail("Not supported on non-indexed type");
+  if ((index < 0) || (index > data.length - 1)) fail("Index value is out of bounds"); 
+  return data[index]; 
+}
 
 function columnAccessor(col) {
   return function(row) {
