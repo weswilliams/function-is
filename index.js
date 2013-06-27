@@ -1,8 +1,5 @@
 _ = require('underscore');
-
-var truthy = function(x) { 
-  return (x !== false) && exists(x); 
-};
+existy = require('./existy.js');
 
 function not(pred) {
   return function(x,y) {
@@ -25,9 +22,9 @@ var greaterThan = not(lessThan);
 
 function comparator(pred) {
   return function(x, y) {
-    if (pred(x,y))
+    if (existy.truthy(pred(x,y)))
       return -1;
-    else if (pred(y,x))
+    else if (existy.truthy(pred(y,x)))
       return 1;
     else
       return 0;
