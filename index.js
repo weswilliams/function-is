@@ -1,4 +1,4 @@
-_ = require('underscore');
+var _ = require('underscore');
 truthy = require('./existy.js').truthy;
 
 function not(pred) {

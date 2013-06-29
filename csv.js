@@ -1,4 +1,4 @@
-_ = require('underscore');
+var _ = require('underscore');
 
 function lamecsv(str) {
   return _.reduce(str.split("\n"), function(table, row) {
