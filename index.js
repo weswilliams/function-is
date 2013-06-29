@@ -1,5 +1,11 @@
 var _ = require('underscore');
-truthy = require('./existy.js').truthy;
+require('./existy.js')(function(existy, truthy) {
+
+function bindy(target, pairs) {
+  _und.each(pairs, function(val, key) {
+    target[key] = val;
+  });
+}
 
 function not(pred) {
   return function(x,y) {
@@ -38,3 +44,5 @@ console.log(array.sort(comparator(lessThan)));
 console.log(array.sort(comparator(greaterThan)));
 
 console.log(array.sort(comparator(or(lessThan, _.isEqual))));
+
+});

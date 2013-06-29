@@ -22,5 +22,10 @@ function anyOf(/* funcs */) {
   }, false);
 }
 
+module.exports = function(target) {
+  this.existy = existy;
+  this.truthy = truthy;
+  target.apply(this, [existy, truthy]);
+};
 module.exports.existy = existy;
 module.exports.truthy = truthy;
