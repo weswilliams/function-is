@@ -4,6 +4,12 @@ function existy(x) { return x != null; }
 
 function truthy(x) { return (x !== false) && existy(x); }
 
+function complement(pred) {
+  return function() {
+    return !pred.apply(null, _und.toArray(arguments));
+  };
+}
+
 function allOf(/* funcs */) {
   return _und.reduceRight(arguments, function(truth, f) {
     return truth && f();
