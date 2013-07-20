@@ -9,6 +9,38 @@ function cat() {
     return [];
 }
 
-console.log(cat([1,2],[2,3]));
+function construct(head, tail) {
+  return cat([head], _und.toArray(tail));
+}
+
+function mapcat(func, coll) {
+  return cat.apply(null, _und.map(coll, func));
+}
+
+function butLast(coll) {
+  return _und.toArray(coll).slice(0,-1);
+}
+
+function interpose(inter, coll) {
+  return butLast(mapcat(function(e) {
+    return construct(e, [inter]);
+  }, coll));
+}
+
+function project(table, keys) {
+  return _und.map(table, function(obj) {
+    return _und.pick.apply(null, construct(obj, keys));
+  });
+}
+
+var library = [ 
+  {title: "SICP", isbn: "0262010771", ed: 1},
+  {title: "SICP", isbn: "0262510871", ed: 2},
+  {title: "Joy of Clojure", isbn: "1935182641", ed: 1}
+];
+
+console.log(project(library, ['title', 'isbn']));
+
+module.exports.construct = construct;
 });
 
