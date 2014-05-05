@@ -3,13 +3,18 @@
 var finder = require('../finder');
 var _ = require('underscore');
 
+function max (x, y) {
+  return x > y;
+}
+
 describe('finder', function() {
   it('should handle native values', function() {
-    finder(_.identity, Math.max, [1,2,3,4,5]).should.equal(5);
+    finder(max, [1,2,3,4,5]).should.equal(5);
   });
 
   it('should handle objects', function() {
-    finder(finder.plucker('age'), Math.max, [
+    var agePlucker = finder.plucker('age');
+    finder(function (x, y) { return max(agePlucker(x), agePlucker(y)); }, [
       {name: 'young', age: 1},
       {name: 'middle', age: 45},
       {name: 'old', age: 99}
