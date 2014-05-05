@@ -17,3 +17,13 @@ module.exports.plucker = function(fieldName) {
 module.exports.repeat = function (times, fun) {
   return _.map(_.range(times), fun);
 };
+
+module.exports.iterateUntil = function (nextValue, check, init) {
+  var values = [];
+  var result = nextValue(init);
+  while(check(result)) {
+    values.push(result);
+    result = nextValue(result);
+  }
+  return values;
+};

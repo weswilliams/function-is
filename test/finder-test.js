@@ -7,6 +7,14 @@ function max (x, y) {
   return x > y;
 }
 
+describe('iterate until', function () {
+  it('should stop based on function', function() {
+    function double(n) { return n + n; }
+    function upto(uptoN) { return function(n) { return n <= uptoN; }; }
+    finder.iterateUntil(double, upto(8), 1).should.matchEach(/[2|4|8]/);
+  });
+});
+
 describe('repeat', function() {
   it('should repeat a string', function() {
     var blah = function () { return 'blah'; }
