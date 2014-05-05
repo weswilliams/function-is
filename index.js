@@ -2,7 +2,7 @@ var _ = require('underscore');
 require('./existy.js')(function(existy, truthy) {
 
 function bindy(target, pairs) {
-  _und.each(pairs, function(val, key) {
+  _.each(pairs, function(val, key) {
     target[key] = val;
   });
 }
@@ -37,7 +37,7 @@ function comparator(pred) {
   };
 }
 
-array = [2,3,-1,-6,0,-100,42,10];
+var array = [2,3,-1,-6,0,-100,42,10];
 
 console.log(array.sort(comparator(lessThan)));
 
