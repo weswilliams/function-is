@@ -9,8 +9,7 @@ describe('finder', function() {
   });
 
   it('should handle objects', function() {
-    function age(ageable) { return ageable.age; }
-    finder(age, Math.max, [
+    finder(finder.plucker('age'), Math.max, [
       {name: 'young', age: 1},
       {name: 'middle', age: 45},
       {name: 'old', age: 99}
