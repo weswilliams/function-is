@@ -8,8 +8,13 @@ function max (x, y) {
 }
 
 describe('repeat', function() {
-  var blah = 'blah';
-  finder.repeat(3, blah).should.matchEach(blah);
+  it('should repeat a string', function() {
+    var blah = function () { return 'blah'; }
+    finder.repeat(3, blah).should.matchEach(blah());
+  });
+  it('should pass a count', function() {
+    finder.repeat(3, function (n) { return n; }).should.matchEach(/[0-3]/);
+  });
 });
 
 describe('finder', function() {

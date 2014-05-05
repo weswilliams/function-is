@@ -14,6 +14,6 @@ module.exports.plucker = function(fieldName) {
   };
 };
 
-module.exports.repeat = function (times, value) {
-  return _.map(_.range(times), function() { return value; });
+module.exports.repeat = function (times, fun) {
+  return _.map(_.range(times), fun);
 };
