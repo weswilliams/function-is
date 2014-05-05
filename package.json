@@ -1,0 +1,30 @@
+{
+  "name": "functional-js",
+  "version": "0.0.1",
+  "description": "working through function js book examples",
+  "main": "index.js",
+  "dependencies": {
+    "underscore": "^1.5.2"
+  },
+  "devDependencies": {
+    "mocha": "^1.18.2",
+    "should": "^3.3.1"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/weswilliams/function-is.git"
+  },
+  "keywords": [
+    "javascript",
+    "functional"
+  ],
+  "author": "Wes Williams",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/weswilliams/function-is/issues"
+  },
+  "homepage": "https://github.com/weswilliams/function-is"
+}
