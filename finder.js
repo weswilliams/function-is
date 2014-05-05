@@ -13,3 +13,7 @@ module.exports.plucker = function(fieldName) {
     return obj && obj[fieldName];
   };
 };
+
+module.exports.repeat = function (times, value) {
+  return _.map(_.range(times), function() { return value; });
+};
