@@ -25,7 +25,7 @@ function anyOf(/* funcs */) {
 }
 
 module.exports = function(target) {
-  target.apply(this, [existy, truthy]);
+  target.apply(null, [module.exports]);
 };
 module.exports.existy = existy;
 module.exports.truthy = truthy;

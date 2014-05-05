@@ -1,48 +1,53 @@
+'use strict';
+
 var _ = require('underscore');
-require('./existy.js')(function(existy, truthy) {
+require('./existy.js')(function (existy) {
+  var truthy = existy.truthy;
 
-function bindy(target, pairs) {
-  _.each(pairs, function(val, key) {
-    target[key] = val;
-  });
-}
+  function bindy(target, pairs) {
+    _.each(pairs, function (val, key) {
+      target[key] = val;
+    });
+  }
 
-function not(pred) {
-  return function(x,y) {
-    return !pred(x,y);
-  };
-}
+  function not(pred) {
+    return function (x, y) {
+      return !pred(x, y);
+    };
+  }
 
-function or() {
-  var preds = arguments;
-  return function(x, y) {
-    return _.reduce(preds, function(memo, pred) { return memo || pred(x,y); }, false);
-  };
-}
+  function or() {
+    var preds = arguments;
+    return function (x, y) {
+      return _.reduce(preds, function (memo, pred) {
+        return memo || pred(x, y);
+      }, false);
+    };
+  }
 
-function lessThan(x, y) {
-  return x < y;
-}
+  function lessThan(x, y) {
+    return x < y;
+  }
 
-var greaterThan = not(lessThan);
+  var greaterThan = not(lessThan);
 
-function comparator(pred) {
-  return function(x, y) {
-    if (truthy(pred(x,y)))
-      return -1;
-    else if (truthy(pred(y,x)))
-      return 1;
-    else
-      return 0;
-  };
-}
+  function comparator(pred) {
+    return function (x, y) {
+      if (truthy(pred(x, y)))
+        return -1;
+      else if (truthy(pred(y, x)))
+        return 1;
+      else
+        return 0;
+    };
+  }
 
-var array = [2,3,-1,-6,0,-100,42,10];
+  var array = [2, 3, -1, -6, 0, -100, 42, 10];
 
-console.log(array.sort(comparator(lessThan)));
+  console.log(array.sort(comparator(lessThan)));
 
-console.log(array.sort(comparator(greaterThan)));
+  console.log(array.sort(comparator(greaterThan)));
 
-console.log(array.sort(comparator(or(lessThan, _.isEqual))));
+  console.log(array.sort(comparator(or(lessThan, _.isEqual))));
 
 });
