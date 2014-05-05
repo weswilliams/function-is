@@ -1,5 +1,4 @@
 'use strict';
-var assert = require('assert');
 var should = require('should');
 var existy = require('../existy').existy;
 
