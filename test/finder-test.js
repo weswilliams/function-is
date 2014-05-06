@@ -17,7 +17,7 @@ describe('iterate until', function () {
 
 describe('repeat', function() {
   it('should repeat a string', function() {
-    var blah = function () { return 'blah'; }
+    var blah = finder.always('blah');
     finder.repeat(3, blah).should.matchEach(blah());
   });
   it('should pass a count', function() {

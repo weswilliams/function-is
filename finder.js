@@ -14,6 +14,10 @@ module.exports.plucker = function(fieldName) {
   };
 };
 
+module.exports.always = function (value) {
+  return function() { return value; };
+};
+
 module.exports.repeat = function (times, fun) {
   return _.map(_.range(times), fun);
 };
