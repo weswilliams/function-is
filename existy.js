@@ -6,6 +6,16 @@ function existy(x) { return x != null; }
 
 function truthy(x) { return (x !== false) && existy(x); }
 
+function fnull(fun) {
+  var defaults = _.rest(arguments);
+  return function() {
+    var args = _.map(arguments, function(arg, index) {
+      return existy(arg) ? arg : defaults[index];
+    });
+    return fun.apply(null, args);
+  };
+}
+
 function doWhen(condition, action) {
   if(truthy(condition)) {
     return action();
@@ -38,3 +48,5 @@ module.exports.existy = existy;
 module.exports.truthy = truthy;
 module.exports.allOf = allOf;
 module.exports.doWhen = doWhen;
+module.exports.fnull = fnull;
+
