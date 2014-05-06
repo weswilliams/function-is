@@ -7,6 +7,12 @@ function max (x, y) {
   return x > y;
 }
 
+describe('invoker', function() {
+  it('should fail with no target', function() {
+    finder.invoker('reverse', Array.prototype.reverse).bind(undefined).should.throw();
+  });
+});
+
 describe('iterate until', function () {
   it('should stop based on function', function() {
     function double(n) { return n + n; }

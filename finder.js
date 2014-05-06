@@ -1,11 +1,19 @@
 'use strict';
 
 var _ = require('underscore');
+var existy = require('./existy');
 
 module.exports = function(fun, coll) {
   return _.reduce(coll, function (x, y) {
     return fun(x, y) ? x : y;
   });
+};
+
+module.exports.invoker = function(name, fun) {
+  return function(target) {
+    if (!existy(target)) { fail('Must provide a target'); }
+
+  };
 };
 
 module.exports.plucker = function(fieldName) {

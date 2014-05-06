@@ -6,6 +6,13 @@ function existy(x) { return x != null; }
 
 function truthy(x) { return (x !== false) && existy(x); }
 
+function doWhen(condition, action) {
+  if(truthy(condition)) {
+    return action();
+  }
+  return undefined;
+}
+
 function complement(pred) {
   return function() {
     return !pred.apply(null, _.toArray(arguments));
@@ -30,3 +37,4 @@ module.exports = function(target) {
 module.exports.existy = existy;
 module.exports.truthy = truthy;
 module.exports.allOf = allOf;
+module.exports.doWhen = doWhen;
