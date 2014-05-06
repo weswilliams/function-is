@@ -9,6 +9,13 @@ module.exports = function(fun, coll) {
   });
 };
 
+module.exports.makeUniqueStringFunction = function(start) {
+  var suffix = start;
+  return function (prefix) {
+    return [prefix, suffix++].join('');
+  };
+};
+
 module.exports.invoker = function(name, method) {
   return function(target) {
     if (!existy.existy(target)) { fail('Must provide a target'); }

@@ -7,6 +7,14 @@ function max (x, y) {
   return x > y;
 }
 
+describe('unique string function', function() {
+  it('should increase suffix with each call', function() {
+    var uniqueStringFun = finder.makeUniqueStringFunction(0);
+    uniqueStringFun('blah').should.equal('blah0');
+    uniqueStringFun('blah').should.equal('blah1');
+  });
+});
+
 describe('invoker', function() {
   it('should fail with no target', function() {
     finder.invoker('reverse', Array.prototype.reverse).bind(undefined).should.throw();
