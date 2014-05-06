@@ -9,6 +9,7 @@ module.exports = function(fun, coll) {
   });
 };
 
+//breaks referential transparency
 module.exports.makeUniqueStringFunction = function(start) {
   var suffix = start;
   return function (prefix) {
