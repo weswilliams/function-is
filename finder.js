@@ -9,10 +9,14 @@ module.exports = function(fun, coll) {
   });
 };
 
-module.exports.invoker = function(name, fun) {
+module.exports.invoker = function(name, method) {
   return function(target) {
-    if (!existy(target)) { fail('Must provide a target'); }
-
+    if (!existy.existy(target)) { fail('Must provide a target'); }
+    var targetMethod = target[name];
+    return existy.doWhen(existy.existy(targetMethod) && method === targetMethod,
+      function() {
+        return method.apply(target, _.rest(arguments));
+      });
   };
 };
 

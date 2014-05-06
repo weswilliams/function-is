@@ -11,6 +11,12 @@ describe('invoker', function() {
   it('should fail with no target', function() {
     finder.invoker('reverse', Array.prototype.reverse).bind(undefined).should.throw();
   });
+  it('should execute function if it exists', function() {
+    finder.invoker('reverse', Array.prototype.reverse)([1,2,3]).should.containDeep([3,2,1]);
+  });
+  it('should not try to execute a non existing function on target', function() {
+    (finder.invoker('reverse', Array.prototype.reverse)({}) === undefined).should.be.true;
+  });
 });
 
 describe('iterate until', function () {
