@@ -19,3 +19,14 @@ module.exports.validator = function(message, predicate) {
   fun.message = message;
   return fun;
 };
+
+module.exports.hasKeys = function() {
+  var keys = _.toArray(arguments);
+  var fun = function(obj) {
+    return _.every(keys, function(key) {
+      return _.has(obj, key);
+    });
+  };
+  fun.message = _.flatten(['Required keys:', keys]).join(' ');
+  return fun;
+};

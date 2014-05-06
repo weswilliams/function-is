@@ -3,6 +3,21 @@ var should = require('should');
 var finder = require('../finder');
 var checker = require('../checker');
 
+describe('has keys', function () {
+  it('should be true if an object has keys', function() {
+    var keyValidator = checker.hasKeys('a', 'b');
+    keyValidator({a: 1, b: 2}).should.equal(true);
+  });
+  it('should be false if an object is missing a key', function() {
+    var keyValidator = checker.hasKeys('a', 'b');
+    keyValidator({a: 1}).should.equal(false);
+  });
+  it('should message indicating required keys', function() {
+    var keyValidator = checker.hasKeys('a', 'b');
+    keyValidator.message.should.equal('Required keys: a b');
+  });
+});
+
 describe('checker', function () {
   it('should have an empty list of errors when the only validator is true', function() {
     var checkerFun = checker(checker.validator('error', finder.always(true)));
