@@ -18,3 +18,13 @@ describe('curry2', function () {
     divideBy10(50).should.equal(5);
   });
 });
+
+describe('curry', function() {
+  it('should execute a function with one variable', function () {
+    curry.curryN(1, function (arg) { return arg; })(1).should.equal(1);
+  });
+  it('should use a second parameter', function() {
+    var divideBy10 = curry.curryN(2, function(n,d) { return n/d; })(10);
+    divideBy10(50).should.equal(5);
+  });
+});
