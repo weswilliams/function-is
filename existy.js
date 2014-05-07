@@ -42,7 +42,7 @@ function anyOf(/* funcs */) {
 }
 
 module.exports = function(target) {
-  target.apply(null, [module.exports]);
+  target.apply(null, [module.exports.existy]);
 };
 module.exports.existy = existy;
 module.exports.truthy = truthy;

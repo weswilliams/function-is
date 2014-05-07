@@ -1,5 +1,5 @@
 var _und = require('underscore');
-require('./existy.js')(function() {
+require('./existy.js')(function(existy) {
 
 function cat() {
   var head = _und.first(arguments);
@@ -42,5 +42,10 @@ var library = [
 console.log(project(library, ['title', 'isbn']));
 
 module.exports.construct = construct;
+module.exports.cat = cat;
+module.exports.mapcat = mapcat;
+module.exports.butLast = butLast;
+module.exports.iterpose = interpose;
+  
 });
 
