@@ -19,7 +19,7 @@ describe('curry2', function () {
   });
 });
 
-describe('curry', function() {
+describe('curryN', function() {
   it('should execute a function with one variable', function () {
     curry.curryN(1, function (arg) { return arg; })(1).should.equal(1);
   });

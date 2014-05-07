@@ -1,5 +1,14 @@
 'use strict';
 
+var dispatch = require('./dispatch');
+var invoker  =require('./finder').invoker;
+
+function always(fun) {
+  return function() {
+    return fun;
+  };
+}
+
 module.exports = function(fun) {
   return function(arg) {
     return fun(arg);
@@ -7,25 +16,26 @@ module.exports = function(fun) {
 };
 
 module.exports.curryN = function(curryArgCnt, fun) {
-  var remainingCurryArgCnt = curryArgCnt;
-  var args = [];
-  var nextArgOrCurry = function(nextArg, curried) {
-    if (--remainingCurryArgCnt >= 1) {
-      console.log('nextArg');
-      return nextArg;
-    }
-    console.log('curried');
-    return curried;
+  var remainingCurryArgCnt = curryArgCnt, args = [];
+  var nextRemaining = function() {
+    var o = {};
+    o['' + remainingCurryArgCnt--] = getCurried;
+    return o;
   };
   var nextArg = function(arg) {
     args.push(arg);
-    return nextArgOrCurry(nextArg, curried);
+    return dispatcher(nextRemaining());
   };
   var curried = function(arg) {
     nextArg(arg);
     return fun.apply(fun, args.reverse());
   };
-  return nextArgOrCurry(nextArg, curried);
+  var getCurried = function() { return curried; };
+  var dispatcher = dispatch(invoker('1', getCurried), always(nextArg));
+  return dispatcher(nextRemaining());
+
+
+//  return nextArgOrCurry(nextArg, curried);
 };
 
 module.exports.curry2 = function(fun) {
