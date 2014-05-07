@@ -10,8 +10,7 @@ module.exports.curryN = function(curryArgCnt, fun) {
   var remainingCurryArgCnt = curryArgCnt;
   var args = [];
   var nextArgOrCurry = function(nextArg, curried) {
-    --remainingCurryArgCnt;
-    if (remainingCurryArgCnt >= 1) {
+    if (--remainingCurryArgCnt >= 1) {
       console.log('nextArg');
       return nextArg;
     }
