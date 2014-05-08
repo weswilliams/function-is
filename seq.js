@@ -13,12 +13,16 @@ function seq(value, seqFun) {
 }
 
 function findN(n, seq) {
-  var nth = seq, remaining = n;
-  while (remaining-1 > 0) { nth = nth.next(); remaining--; }
+  var nth = seq, remaining = n-1;
+  while (remaining > 0) { nth = nth.next(); remaining--; }
   return nth;
 }
 
 module.exports = seq;
+
+module.exports.drop = function(n, seq) {
+  return findN(n+1, seq);
+};
 
 module.exports.takeN = function(n, seq) {
   return findN(n, seq)();
