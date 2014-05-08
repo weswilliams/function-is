@@ -12,15 +12,16 @@ function seq(value, seqFun) {
   return fun;
 }
 
+function findN(n, seq) {
+  var nth = seq, remaining = n;
+  while (remaining-1 > 0) { nth = nth.next(); remaining--; }
+  return nth;
+}
+
 module.exports = seq;
 
 module.exports.takeN = function(n, seq) {
-  var nth = seq, remaining = n;
-  while (remaining-1 > 0) { nth = nth.next(); remaining--; }
-//  var nth = _.reduce(_.range(n - 1), function(next) {
-//    return next.next();
-//  }, seq);
-  return nth();
+  return findN(n, seq)();
 };
 
 module.exports.take = function(n, seq) {
