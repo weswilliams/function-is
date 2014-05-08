@@ -4,9 +4,6 @@ var _ = require('underscore');
 
 function seq(value, seqFun) {
   var fun = function() {
-
-  };
-  fun.value = function() {
     return value;
   };
   fun.next = function() {
@@ -18,10 +15,10 @@ function seq(value, seqFun) {
 module.exports = seq;
 
 module.exports.take = function(n, seq) {
-  var next = seq;
+  var nextSeq = seq;
   return _.map(_.range(n), function() {
-    var value = next.value();
-    next = next.next();
+    var value = nextSeq();
+    nextSeq = nextSeq.next();
     return value;
   });
 };
