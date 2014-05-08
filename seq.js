@@ -14,6 +14,15 @@ function seq(value, seqFun) {
 
 module.exports = seq;
 
+module.exports.takeN = function(n, seq) {
+  var nextSeq = seq;
+  return _.reduce(_.range(n), function() {
+    var value = nextSeq();
+    nextSeq = nextSeq.next();
+    return value;
+  }, nextSeq());
+};
+
 module.exports.take = function(n, seq) {
   var nextSeq = seq;
   return _.map(_.range(n), function() {

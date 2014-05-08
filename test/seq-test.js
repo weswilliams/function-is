@@ -6,7 +6,20 @@ function fib(arg1, arg2) {
   return seq(arg1, seq.lazyInvoker(fib, arg2, arg1 + arg2));
 }
 
-beforeEach(function() {
+describe('takeN', function() {
+  it('should find the first item in the seq', function() {
+    seq.takeN(1, fib(1,1)).should.equal(1);
+  });
+  it('should find the second item in the seq', function() {
+    seq.takeN(2, fib(1,1)).should.equal(1);
+  });
+  it('should find the 1000th item in the seq', function() {
+    seq.takeN(100, fib(1,1)).should.equal(354224848179262000000);
+  });
+  // todo add some type of tail call optimization
+//  it('should not crash memory on a very big index', function() {
+//    seq.takeN.bind(null, 100000000, fib(1,1)).should.not.throw();
+//  });
 });
 
 describe('seq and take 1', function() {
