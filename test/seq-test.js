@@ -16,7 +16,7 @@ describe('takeN', function() {
   it('should find the 1000th item in the seq', function() {
     seq.takeN(100, fib(1,1)).should.equal(354224848179262000000);
   });
-  // todo add some type of tail call optimization
+  // SLOW: this test seq takeN has tail call optimization
 //  it('should not crash memory on a very big index', function() {
 //    seq.takeN.bind(null, 100000000, fib(1,1)).should.not.throw();
 //  });

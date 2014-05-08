@@ -15,9 +15,11 @@ function seq(value, seqFun) {
 module.exports = seq;
 
 module.exports.takeN = function(n, seq) {
-  var nth = _.reduce(_.range(n - 1), function(next) {
-    return next.next();
-  }, seq);
+  var nth = seq, remaining = n;
+  while (remaining-1 > 0) { nth = nth.next(); remaining--; }
+//  var nth = _.reduce(_.range(n - 1), function(next) {
+//    return next.next();
+//  }, seq);
   return nth();
 };
 
