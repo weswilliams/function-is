@@ -6,6 +6,13 @@ function fib(arg1, arg2) {
   return seq(arg1, seq.lazyInvoker(fib, arg2, arg1 + arg2));
 }
 
+describe('cons', function() {
+  it('should create a new seq with item as the first element', function () {
+    var fibs = fib(1,1);
+    seq.take(4, seq.cons(9, fibs)).should.containDeep([9,1,1,2]);
+  });
+});
+
 describe('rest', function() {
   it('should create new seq stating at the second item of a seq', function () {
     seq.take(2, seq.rest(fib(1,1))).should.containDeep([1,2]);

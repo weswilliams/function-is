@@ -51,3 +51,7 @@ module.exports.first = function(seq) {
 module.exports.rest = function (seq) {
   return seq.next();
 };
+
+module.exports.cons = function(item, aSeq) {
+  return seq(item, seq.lazyInvoker(function () { return aSeq; }));
+};
