@@ -43,3 +43,7 @@ module.exports.lazyInvoker = function(fun) {
     return fun.apply(fun, args);
   };
 };
+
+module.exports.first = function(seq) {
+  return seq.next()();
+};

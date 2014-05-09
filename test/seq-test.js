@@ -6,6 +6,12 @@ function fib(arg1, arg2) {
   return seq(arg1, seq.lazyInvoker(fib, arg2, arg1 + arg2));
 }
 
+describe('first', function () {
+  it('should return the first item in a seq', function() {
+    seq.first(fib(1,1)).should.equal(1);
+  });
+});
+
 describe('drop', function() {
   it('should create a new seq n items into a seq', function() {
     var dropped = seq.drop(2, fib(1,1));
