@@ -10,6 +10,9 @@ describe('first', function () {
   it('should return the first item in a seq', function() {
     seq.first(fib(1,1)).should.equal(1);
   });
+  it('should work on seq returned from another seq function', function() {
+    seq.first(seq.drop(2, fib(1,1))).should.equal(2);
+  });
 });
 
 describe('drop', function() {
