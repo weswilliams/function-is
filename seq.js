@@ -12,24 +12,24 @@ function seq(value, seqFun) {
   return fun;
 }
 
-function findN(n, seq) {
-  var nth = seq, remaining = n-1;
+function findN(n, aSeq) {
+  var nth = aSeq, remaining = n-1;
   while (remaining > 0) { nth = nth.next(); remaining--; }
   return nth;
 }
 
 module.exports = seq;
 
-module.exports.drop = function(n, seq) {
-  return findN(n+1, seq);
+module.exports.drop = function(n, aSeq) {
+  return findN(n+1, aSeq);
 };
 
-module.exports.takeN = function(n, seq) {
-  return findN(n, seq)();
+module.exports.takeN = function(n, aSeq) {
+  return findN(n, aSeq)();
 };
 
-module.exports.take = function(n, seq) {
-  var nextSeq = seq;
+module.exports.take = function(n, aSeq) {
+  var nextSeq = aSeq;
   return _.map(_.range(n), function() {
     var value = nextSeq();
     nextSeq = nextSeq.next();
@@ -44,12 +44,12 @@ module.exports.lazyInvoker = function(fun) {
   };
 };
 
-module.exports.first = function(seq) {
-  return seq();
+module.exports.first = function(aSeq) {
+  return aSeq();
 };
 
-module.exports.rest = function (seq) {
-  return seq.next();
+module.exports.rest = function (aSeq) {
+  return aSeq.next();
 };
 
 module.exports.cons = function(item, aSeq) {
