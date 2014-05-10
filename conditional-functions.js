@@ -14,10 +14,14 @@ module.exports = function(fun /* arguments */) {
   };
 };
 
-module.exports.postCondition = function(fun, validator) {
+module.exports.postCondition = function(fun /* validators */) {
+  var validators = _.rest(arguments);
   return function () {
     var ret = fun.apply(fun, _.toArray(arguments));
-    if (!validator(ret)) { throw new Error(validator.message); }
+    var errors = _.chain(validators).map(function(validator) {
+      return validator(ret) ? undefined : validator.message;
+    }).compact().value();
+    if (errors.length > 0) { throw new Error(errors.join(', ')); }
     return ret;
   };
 };

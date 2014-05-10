@@ -23,6 +23,10 @@ describe('function with post condition', function () {
     var postCondFun = conditionalFun.postCondition(myFun, isNumber);
     postCondFun.bind(1).should.throw(isNumber.message);
   });
+  it('should throw Error for invalid post condition with multi-validation errors', function () {
+    var postCondFun = conditionalFun.postCondition(myFun, isNumber, isZero);
+    postCondFun.bind(1).should.throw([isNumber.message, isZero.message].join([', ']));
+  });
 });
 describe('function with pre-conditions', function () {
   it('should return function results with no errors', function () {
