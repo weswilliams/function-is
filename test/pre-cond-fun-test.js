@@ -4,12 +4,31 @@ var conditionalFun = require('../conditional-functions');
 var checker = require('../checker');
 var _ = require('underscore');
 
-var isNumber, isZero, myFun;
+var isNumber, isZero, isArray, myFun;
 
 beforeEach(function () {
   isNumber = checker.validator('must be a number', _.isNumber);
   isZero = checker.validator('must be zero', function(n) { return n === 0; });
+  isArray = checker.validator('must return an array', _.isArray);
   myFun = function () { return _.toArray(arguments); };
+});
+
+describe('pre and post conditional function', function () {
+  it('should return value with no pre or post errors', function(){
+    var preCondFun = conditionalFun.preCondition(myFun, isNumber);
+    var prePostCondFun = conditionalFun.postCondition(preCondFun, isArray);
+    prePostCondFun(1).should.containDeep([1]);
+  });
+  it('should throw pre errors', function(){
+    var preCondFun = conditionalFun.preCondition(myFun, isNumber);
+    var prePostCondFun = conditionalFun.postCondition(preCondFun, isArray);
+    prePostCondFun.bind('x').should.throw(isNumber.message);
+  });
+  it('should throw post errors', function(){
+    var preCondFun = conditionalFun.preCondition(myFun, isNumber);
+    var prePostCondFun = conditionalFun.postCondition(preCondFun, isNumber);
+    prePostCondFun.bind(1).should.throw(isNumber.message);
+  });
 });
 
 describe('function with pre-conditions', function () {
@@ -32,10 +51,9 @@ describe('function with pre-conditions', function () {
 });
 
 describe('function with post condition', function () {
-  var isArray, postCondition;
+  var postCondition;
   beforeEach(function () {
     postCondition = conditionalFun.postCondition;
-    isArray = checker.validator('must return an array', _.isArray);
   });
   it('should return function call results if post condition met', function () {
     var postCondFun = postCondition(myFun, isArray);
