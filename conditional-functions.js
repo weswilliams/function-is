@@ -13,3 +13,11 @@ module.exports = function(fun /* arguments */) {
     return fun.apply(fun, funArgs);
   };
 };
+
+module.exports.postCondition = function(fun, validator) {
+  return function () {
+    var ret = fun.apply(fun, _.toArray(arguments));
+    if (!validator(ret)) { throw new Error(validator.message); }
+    return ret;
+  };
+};
