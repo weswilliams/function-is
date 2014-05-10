@@ -2,7 +2,7 @@
 
 var _ = require('underscore');
 
-module.exports = function(fun /* arguments */) {
+function preCondition (fun /* arguments */) {
   var argValidators = _.rest(arguments);
   return function(/* arguments */) {
     var funArgs = _.toArray(arguments);
@@ -12,7 +12,11 @@ module.exports = function(fun /* arguments */) {
     if (errors.length > 0) { throw new Error(errors.join(', ')); }
     return fun.apply(fun, funArgs);
   };
-};
+}
+
+module.exports = preCondition;
+
+module.exports.preCondition = preCondition;
 
 module.exports.postCondition = function(fun /* validators */) {
   var validators = _.rest(arguments);
